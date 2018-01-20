@@ -1,0 +1,79 @@
+---
+title: "Sales"
+author: "Mayank Badjatya"
+date: "December 10, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r}
+setwd("~/Documents/Capstone/Submissions/Marketing Analysis/Chapter 34-36")
+sales <- read.csv(file = "diet.csv", stringsAsFactors = FALSE)
+
+head(sales)
+str(sales)
+summary(sales)
+
+library(ggplot2)
+library(ggthemes)
+library(dplyr)
+
+cor.data <- cor(sales)
+cor.data
+
+
+library(corrplot)
+library(corrgram)
+
+corrplot(cor.data,method='color')
+corrgram(sales,order=TRUE, lower.panel=panel.shade,
+         upper.panel=panel.pie, text.panel=panel.txt)
+
+ggplot(sales,aes(x=Sales)) + geom_histogram(bins=20,alpha=0.5,fill='blue') 
+
+library(caTools)
+set.seed(101)
+
+sample <- sample.split(sales$Sales, SplitRatio = 0.66)
+train = subset(sales, sample == TRUE)
+test = subset(sales, sample == FALSE)
+
+model <- lm(Sales ~ .,train)
+summary(model)
+
+res <- residuals(model)
+res <- as.data.frame(res)
+head(res)
+
+ggplot(res,aes(res)) +  geom_histogram(fill='blue',alpha=0.5)
+plot(model)
+
+sales.predictions <- predict(model,test)
+
+results <- cbind(sales.predictions,test$Sales) 
+colnames(results) <- c('pred','real')
+results <- as.data.frame(results)
+
+to_zero <- function(x){
+  if  (x < 0){
+    return(0)
+  }else{
+    return(x)
+  }
+}
+results$pred <- sapply(results$pred,to_zero)
+
+mse <- mean((results$real-results$pred)^2)
+print(mse)
+mse^0.5
+SSE = sum((results$pred - results$real)^2)
+SST = sum( (mean(sales$Sales) - results$real)^2)
+R2 = 1 - SSE/SST
+R2
+```
+

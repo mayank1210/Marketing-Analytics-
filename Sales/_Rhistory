@@ -1,0 +1,263 @@
+setwd("~/Documents/Capstone/Submissions/Marketing Analysis/Chapter 34-36")
+sales <- read.csv(file = "sales.csv", stringsAsFactors = FALSE)
+sales <- read.csv(file = "sales", stringsAsFactors = FALSE)
+sales <- read.csv(file = "diet.csv", stringsAsFactors = FALSE)
+sales
+R2 = 1 - SSE/SST
+SST = sum( (mean(sales$Sales) - results$real)^2)
+setwd("~/Documents/Capstone/Submissions/Marketing Analysis/Chapter 34-36")
+sales <- read.csv(file = "diet.csv", stringsAsFactors = FALSE)
+head(sales)
+str(sales)
+summary(sales)
+library(ggplot2)
+library(ggthemes)
+library(dplyr)
+cor.data <- cor(sales)
+cor.data
+library(corrplot)
+library(corrgram)
+corrplot(cor.data,method='color')
+corrgram(sales,order=TRUE, lower.panel=panel.shade,
+upper.panel=panel.pie, text.panel=panel.txt)
+ggplot(sales,aes(x=Sales)) + geom_histogram(bins=20,alpha=0.5,fill='blue')
++ theme_minimal()
+library(caTools)
+set.seed(101)
+sample <- sample.split(df$Sales, SplitRatio = 0.66)
+train = subset(sales, sample == TRUE)
+test = subset(sales, sample == FALSE)
+model <- lm(Sales ~ .,train)
+summary(model)
+res <- residuals(model)
+res <- as.data.frame(res)
+head(res)
+ggplot(res,aes(res)) +  geom_histogram(fill='blue',alpha=0.5)
+plot(model)
+sales.predictions <- predict(model,test)
+results <- cbind(sales.predictions,test$Sales)
+colnames(results) <- c('pred','real')
+results <- as.data.frame(results)
+to_zero <- function(x){
+if  (x < 0){
+return(0)
+}else{
+return(x)
+}
+}
+results$pred <- sapply(results$pred,to_zero)
+mse <- mean((results$real-results$pred)^2)
+print(mse)
+mse^0.5
+SSE = sum((results$pred - results$real)^2)
+SST = sum( (mean(sales$Sales) - results$real)^2)
+R2 = 1 - SSE/SST
+R2
+setwd("~/Documents/Capstone/Submissions/Marketing Analysis/Chapter 34-36")
+sales <- read.csv(file = "diet.csv", stringsAsFactors = FALSE)
+head(sales)
+str(sales)
+summary(sales)
+library(ggplot2)
+library(ggthemes)
+library(dplyr)
+cor.data <- cor(sales)
+cor.data
+library(corrplot)
+library(corrgram)
+corrplot(cor.data,method='color')
+corrgram(sales,order=TRUE, lower.panel=panel.shade,
+upper.panel=panel.pie, text.panel=panel.txt)
+ggplot(sales,aes(x=Sales)) + geom_histogram(bins=20,alpha=0.5,fill='blue')
++ theme_minimal()
+library(caTools)
+set.seed(101)
+sample <- sample.split(sales$Sales, SplitRatio = 0.66)
+train = subset(sales, sample == TRUE)
+test = subset(sales, sample == FALSE)
+model <- lm(Sales ~ .,train)
+summary(model)
+res <- residuals(model)
+res <- as.data.frame(res)
+head(res)
+ggplot(res,aes(res)) +  geom_histogram(fill='blue',alpha=0.5)
+plot(model)
+colnames(results) <- c('pred','real')
+results <- as.data.frame(results)
+to_zero <- function(x){
+if  (x < 0){
+return(0)
+}else{
+return(x)
+}
+}
+results$pred <- sapply(results$pred,to_zero)
+mse <- mean((results$real-results$pred)^2)
+print(mse)
+mse^0.5
+SSE = sum((results$pred - results$real)^2)
+SST = sum( (mean(sales$Sales) - results$real)^2)
+R2 = 1 - SSE/SST
+R2
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/Documents/Capstone/Submissions/Marketing Analysis/Chapter 34-36")
+sales <- read.csv(file = "diet.csv", stringsAsFactors = FALSE)
+head(sales)
+str(sales)
+summary(sales)
+library(ggplot2)
+library(ggthemes)
+library(dplyr)
+cor.data <- cor(sales)
+cor.data
+library(corrplot)
+library(corrgram)
+corrplot(cor.data,method='color')
+corrgram(sales,order=TRUE, lower.panel=panel.shade,
+upper.panel=panel.pie, text.panel=panel.txt)
+ggplot(sales,aes(x=Sales)) + geom_histogram(bins=20,alpha=0.5,fill='blue')
++ theme_minimal()
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/Documents/Capstone/Submissions/Marketing Analysis/Chapter 34-36")
+sales <- read.csv(file = "diet.csv", stringsAsFactors = FALSE)
+head(sales)
+str(sales)
+summary(sales)
+library(ggplot2)
+library(ggthemes)
+library(dplyr)
+cor.data <- cor(sales)
+cor.data
+library(corrplot)
+library(corrgram)
+corrplot(cor.data,method='color')
+corrgram(sales,order=TRUE, lower.panel=panel.shade,
+upper.panel=panel.pie, text.panel=panel.txt)
+ggplot(sales,aes(x=Sales)) + geom_histogram(bins=20,alpha=0.5,fill='blue')
+library(caTools)
+set.seed(101)
+sample <- sample.split(sales$Sales, SplitRatio = 0.66)
+train = subset(sales, sample == TRUE)
+test = subset(sales, sample == FALSE)
+model <- lm(Sales ~ .,train)
+summary(model)
+res <- residuals(model)
+res <- as.data.frame(res)
+head(res)
+ggplot(res,aes(res)) +  geom_histogram(fill='blue',alpha=0.5)
+plot(model)
+sales.predictions <- predict(model,test)
+results <- cbind(sales.predictions,test$Sales)
+colnames(results) <- c('pred','real')
+results <- as.data.frame(results)
+to_zero <- function(x){
+if  (x < 0){
+return(0)
+}else{
+return(x)
+}
+}
+results$pred <- sapply(results$pred,to_zero)
+mse <- mean((results$real-results$pred)^2)
+print(mse)
+mse^0.5
+SSE = sum((results$pred - results$real)^2)
+SST = sum( (mean(sales$Sales) - results$real)^2)
+R2 = 1 - SSE/SST
+R2
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/Documents/Capstone/Submissions/Marketing Analysis/Chapter 34-36")
+continous <- read.csv(file = "continous.csv", stringsAsFactors = FALSE)
+head(continous)
+str(continous)
+summary(continous)
+library(ggplot2)
+library(ggthemes)
+library(dplyr)
+cor.data <- cor(continous)
+cor.data
+library(corrplot)
+library(corrgram)
+corrplot(cor.data,method='color')
+corrgram(continous,order=TRUE, lower.panel=panel.shade,
+upper.panel=panel.pie, text.panel=panel.txt)
+ggplot(continous,aes(x=Advertising)) + geom_histogram(bins=20,alpha=0.5,fill='blue')
+library(caTools)
+set.seed(101)
+sample <- sample.split(continous$Advertising, SplitRatio = 0.66)
+train = subset(continous, sample == TRUE)
+test = subset(continous, sample == FALSE)
+model <- lm(Advertising ~ .,train)
+summary(model)
+res <- residuals(model)
+res <- as.data.frame(res)
+head(res)
+ggplot(res,aes(res)) +  geom_histogram(fill='blue',alpha=0.5)
+plot(model)
+continous.predictions <- predict(model,test)
+results <- cbind(continous.predictions,test$Advertising)
+colnames(results) <- c('pred','real')
+results <- as.data.frame(results)
+to_zero <- function(x){
+if  (x < 0){
+return(0)
+}else{
+return(x)
+}
+}
+results$pred <- sapply(results$pred,to_zero)
+mse <- mean((results$real-results$pred)^2)
+print(mse)
+mse^0.5
+SSE = sum((results$pred - results$real)^2)
+SST = sum( (mean(continous$Advertising) - results$real)^2)
+R2 = 1 - SSE/SST
+R2
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/Documents/Capstone/Submissions/Marketing Analysis/Chapter 34-36")
+Pulse <- read.csv(file = "Pulse.csv", stringsAsFactors = FALSE)
+head(Pulse)
+str(Pulse)
+summary(Pulse)
+library(ggplot2)
+library(ggthemes)
+library(dplyr)
+cor.data <- cor(Pulse)
+cor.data
+library(corrplot)
+library(corrgram)
+corrplot(cor.data,method='color')
+corrgram(Pulse,order=TRUE, lower.panel=panel.shade,
+upper.panel=panel.pie, text.panel=panel.txt)
+ggplot(Pulse,aes(x=Advertising)) + geom_histogram(bins=20,alpha=0.5,fill='blue')
+library(caTools)
+set.seed(101)
+sample <- sample.split(Pulse$Advertising, SplitRatio = 0.66)
+train = subset(Pulse, sample == TRUE)
+test = subset(Pulse, sample == FALSE)
+model <- lm(Advertising ~ .,train)
+summary(model)
+res <- residuals(model)
+res <- as.data.frame(res)
+head(res)
+ggplot(res,aes(res)) +  geom_histogram(fill='blue',alpha=0.5)
+plot(model)
+Pulse.predictions <- predict(model,test)
+results <- cbind(Pulse.predictions,test$Advertising)
+colnames(results) <- c('pred','real')
+results <- as.data.frame(results)
+to_zero <- function(x){
+if  (x < 0){
+return(0)
+}else{
+return(x)
+}
+}
+results$pred <- sapply(results$pred,to_zero)
+mse <- mean((results$real-results$pred)^2)
+print(mse)
+mse^0.5
+SSE = sum((results$pred - results$real)^2)
+SST = sum( (mean(Pulse$Advertising) - results$real)^2)
+R2 = 1 - SSE/SST
+R2
