@@ -1,0 +1,2 @@
+# Marketing-Analytics-
+This project was intended to learn various models commonly used in the industry and also educate us in domain knowledge. The objective of this capstone project was to investigate wide variety of marketing data problems, build models in R/Python and provide actionable marketing insights to businesses. A source of large spectrum of marketing datasets was identified and used various analytics techniques such as exploratory analysis, classification, regression, clustering and association rules to address marketing problems on these datasets.
